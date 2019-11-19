@@ -102,3 +102,4 @@ ENV/
 
 # .idea folder from pycharm
 .idea
+*.iml
