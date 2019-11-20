@@ -3,43 +3,24 @@
 #
 # Modified 2019 Ryan William <rwev@protonmail.ch>
 # Copyright © 2017 Gael Lederrey <gael.lederrey@epfl.ch>
-# Based on the code of Ulf Alstrom (http://www.happyponyland.net/camogen.php)
+# Based on the code of Ulf Alstrom (http://www.happyponyland.net/php)
 #
 # Distributed under terms of the MIT license.
 
-import camogen
 from PIL import Image
-
-WIDTH = 1920
-HEIGHT = 1080
+from camogen import generate, DEFAULT_PARAMETERS
 
 SAVE_SCALE = 0.5
 
-DEFAULT_PARAMETERS = {
-    'width': WIDTH,
-    'height': HEIGHT,
-    'polygon_size': 50,
-    'color_bleed': 60,
-    'max_depth': 100,
-    'spots': {
-        'amount': 0,
-        'radius': {
-            'min': 2,
-            'max': 10
-        },
-        'sampling_variation': 5
-    }
-}
-
 
 def scale_and_save(pil_image, path):
-    scaled_size = (int(WIDTH * SAVE_SCALE), int(HEIGHT * SAVE_SCALE))
+    scaled_size = (int(DEFAULT_PARAMETERS.WIDTH * SAVE_SCALE), int(DEFAULT_PARAMETERS.HEIGHT * SAVE_SCALE))
     pil_image = pil_image.resize(scaled_size, Image.ANTIALIAS)
     pil_image.save(path)
 
 
 scale_and_save(
-    camogen.generate(
+    generate(
         {
             **DEFAULT_PARAMETERS,
             'polygon_size': 50,
@@ -52,7 +33,7 @@ scale_and_save(
 )
 
 scale_and_save(
-    camogen.generate(
+    generate(
         {
             **DEFAULT_PARAMETERS,
             'polygon_size': 150,

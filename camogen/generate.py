@@ -14,6 +14,22 @@ from camogen.helpers import *
 
 from PIL import Image, ImageDraw
 
+DEFAULT_PARAMETERS = {
+    'width': 1920,
+    'height': 1080,
+    'polygon_size': 50,
+    'color_bleed': 60,
+    'max_depth': 100,
+    'spots': {
+        'amount': 0,
+        'radius': {
+            'min': 2,
+            'max': 10
+        },
+        'sampling_variation': 5
+    }
+}
+
 
 def generate_polygons(pattern, polygon, depth):
     """
@@ -46,7 +62,7 @@ def generate_polygons(pattern, polygon, depth):
         edge_lengths = []
 
         for i in range(nbr_edges):
-            edge_lengths.append(dist_vertices(polygon.list_vertices[i], polygon.list_vertices[(i+1) % nbr_edges]))
+            edge_lengths.append(dist_vertices(polygon.list_vertices[i], polygon.list_vertices[(i + 1) % nbr_edges]))
 
         # We sort the edges in function of their lengths. We are interested in the indices
         idx_edge_sorted = np.argsort(edge_lengths)[::-1]
@@ -75,17 +91,17 @@ def generate_polygons(pattern, polygon, depth):
         # The dividing edge is included in both
 
         # Polygon A
-        for i in range(0, idx_edge_a+1):
+        for i in range(0, idx_edge_a + 1):
             polygon_a.add_vertex(polygon.list_vertices[i])
 
         for v in edge_c:
             polygon_a.add_vertex(v)
 
-        for i in range(idx_edge_b+1, nbr_edges):
+        for i in range(idx_edge_b + 1, nbr_edges):
             polygon_a.add_vertex(polygon.list_vertices[i])
 
         # Polygon B
-        for i in range(idx_edge_a+1, idx_edge_b+1):
+        for i in range(idx_edge_a + 1, idx_edge_b + 1):
             polygon_b.add_vertex(polygon.list_vertices[i])
 
         for v in edge_c[::-1]:
@@ -127,7 +143,7 @@ def generate_image(pattern):
             color_polygon(pattern, i, np.random.randint(len(pattern.colors)), pattern.color_bleed)
 
     # Background
-    draw.rectangle((0, 0, pattern.width-1, pattern.height-1), fill=pattern.colors[0])
+    draw.rectangle((0, 0, pattern.width - 1, pattern.height - 1), fill=pattern.colors[0])
 
     # Draw the polygons with their correct color
     draw_polygons(draw, pattern, use_index=False)
@@ -147,7 +163,7 @@ def generate(parameters):
     """
     Generate the Camouflage pattern given the parameters
 
-    :param parameters: Dictionnary of parameters
+    :param parameters: Dictionary of parameters
     :return: Image with the camouflage pattern
     """
 

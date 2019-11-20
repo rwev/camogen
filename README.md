@@ -2,7 +2,12 @@
 
 (**camo**uflage **gen**erator)
 
-## Usage
+## installation 
+```[bash]
+$ pip install https://github.com/rwev/camogen/archive/master.zip
+```
+
+## usage
 ```[python]
 import camogen
 
@@ -14,9 +19,9 @@ image = camogen.generate(parameters)
 
 where `image` is of type `PIL.Image`.
 
-### Parameters
+### parameters
 
-The parameters given is a python dictionary. The following parameters are mandatory:
+The parameters given is a Python dictionary. The following parameters are mandatory:
 
 | Parameter    | Type        |  Description                                                                                          |
 | ------------ | ------------ | ----------------------------------------------------------------------------------------------------- |
@@ -47,17 +52,16 @@ The next set of parameters pixelizes the camouflage. In the dictionary, you have
 
 You can find examples how to generate some camouflage in the file `examples.py`
 
-## Examples
+## examples
 
 These camouflage patterns are generated using color palettes from [pypalette](https://gitlab.com/rwev/pypalette). See `examples.py` for their parametrization.  
 
-#### Coyote Summer
-![Coyote Summer](./images/coyote-summer.png)
+#### coyote summer
+![coyote summer](./images/coyote-summer.png)
 
-#### Coyote Winter
-![Coyote Winter](./images/coyote-winter.png)
+#### coyote winter
+![coyote winter](./images/coyote-winter.png)
 
 ### TODO
-- save parameterization as metadata to image
-- file watcher integration (generate and update on parameterization change) 
-- make distributable
+- save parametrization as metadata to image
+- file watcher integration (generate and update on parametrization change) 
