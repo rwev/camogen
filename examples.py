@@ -10,41 +10,56 @@
 import camogen
 from PIL import Image
 
-RUN_SCALE = 2500
-SAVE_SCALE = 1000
+WIDTH = 1920
+HEIGHT = 1080
+
+SAVE_SCALE = 0.5
+
+DEFAULT_PARAMETERS = {
+    'width': WIDTH,
+    'height': HEIGHT,
+    'polygon_size': 50,
+    'color_bleed': 60,
+    'max_depth': 100,
+    'spots': {
+        'amount': 0,
+        'radius': {
+            'min': 2,
+            'max': 10
+        },
+        'sampling_variation': 5
+    }
+}
 
 
 def scale_and_save(pil_image, path):
-    pil_image = pil_image.resize((SAVE_SCALE, SAVE_SCALE), Image.ANTIALIAS)
+    scaled_size = (int(WIDTH * SAVE_SCALE), int(HEIGHT * SAVE_SCALE))
+    pil_image = pil_image.resize(scaled_size, Image.ANTIALIAS)
     pil_image.save(path)
 
 
-parameters = {'width': RUN_SCALE,
-              'height': RUN_SCALE,
-              'polygon_size': 50,
-              'color_bleed': 60,
-              'max_depth': 100,
-              'colors': ['#51452F', '#6D5344', '#776560', '#8E6E51', '#8F7E70', '#A08164', '#AB8E73', '#B69981'],
-              'spots': {'amount': 0,
-                        'radius': {'min': 2,
-                                   'max': 10},
-                        'sampling_variation': 5}}
 scale_and_save(
-    camogen.generate(parameters),
+    camogen.generate(
+        {
+            **DEFAULT_PARAMETERS,
+            'polygon_size': 50,
+            'color_bleed': 60,
+            'max_depth': 100,
+            'colors': ['#51452F', '#6D5344', '#776560', '#8E6E51', '#8F7E70', '#A08164', '#AB8E73', '#B69981'],
+        }
+    ),
     './images/coyote-summer.png'
 )
 
-parameters = {'width': RUN_SCALE,
-              'height': RUN_SCALE,
-              'polygon_size': 150,
-              'color_bleed': 300,
-              'max_depth': 50,
-              'colors': ['#A48C71', '#B6A798', '#C7BEB7', '#D1CBC7', '#D9D7D6', '#E2E5E8', '#ECEEEF'],
-              'spots': {'amount': 0,
-                        'radius': {'min': 2,
-                                   'max': 10},
-                        'sampling_variation': 5}}
 scale_and_save(
-    camogen.generate(parameters),
+    camogen.generate(
+        {
+            **DEFAULT_PARAMETERS,
+            'polygon_size': 150,
+            'color_bleed': 300,
+            'max_depth': 50,
+            'colors': ['#A48C71', '#B6A798', '#C7BEB7', '#D1CBC7', '#D9D7D6', '#E2E5E8', '#ECEEEF'],
+        }
+    ),
     './images/coyote-winter.png'
 )
