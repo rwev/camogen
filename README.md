@@ -1,13 +1,8 @@
-# camogen
+# camogen 
 
-This repository is a **camo**uflage **gen**erator. 
+(**camo**uflage **gen**erator)
 
-**WARNING**  *The code only works with Python3 for the moment!*  **WARNING**
-
-## How to use
-
-Here is a very simple example how to use the generator:
-
+## Usage
 ```[python]
 import camogen
 
@@ -16,16 +11,17 @@ parameters = {'width': 700, 'height': 700, 'polygon_size': 400, 'color_bleed': 0
 
 image = camogen.generate(parameters)
 ```
-The parameter `image` corresponds to the object `Image` from the package `PIL`.
+
+where `image` is of type `PIL.Image`.
 
 ### Parameters
 
 The parameters given is a python dictionary. The following parameters are mandatory:
 
-| Parameter    | Types        |  Explanation                                                                                          |
+| Parameter    | Type        |  Description                                                                                          |
 | ------------ | ------------ | ----------------------------------------------------------------------------------------------------- |
 | width        | Int          | Width of the image (Minimum value: 0)                                                                 |
-| height       | Int          | Height of the image (Minim value: 0)                                                                  |
+| height       | Int          | Height of the image (Minimum value: 0)                                                                  |
 | polygon_size | Int          | Minimum perimeter of a polygon (Minimum value: 0)                                                     |
 | color_bleed  | Int          | Bleeding of the colors, *i.e.* number of neighbouring polygons with the same color (Minimum value: 0) |
 | colors       | list[String] | List of all the colors. Colors have to be a Hex String. (Minimum size: 1)                             |
@@ -43,7 +39,7 @@ The next set of parameters adds spots on the camouflage. In the dictionary, you 
 The next set of parameters pixelizes the camouflage. In the dictionary, you have to add these parameters with the key
 `pixelize`. If you want to pixelize the camouflage, all these parameters are mandatory:
 
-| Parameter          | Types |  Explanation                                                                                       |
+| Parameter          | Types |  Explanation                                                                                        |
 | ------------------ | ----- | -------------------------------------------------------------------------------------------------- |
 | amount             | float | Percentage of pixelization (Between 0 and 1)                                                       |
 | sampling_variation | Int   | Variation for the sampling, *i.e.* how far it goes looking for the color for the spot.             |
@@ -53,31 +49,15 @@ You can find examples how to generate some camouflage in the file `examples.py`
 
 ## Examples
 
-#### Green Blots
-![Green Blots](./images/green_blots.png)
+These camouflage patterns are generated using color palettes from [pypalette](https://gitlab.com/rwev/pypalette). See `examples.py` for their parametrization.  
 
-#### Mighty Swede
-![Mighty Swede](./images/mighty_swede.png)
+#### Coyote Summer
+![Coyote Summer](./images/coyote-summer.png)
 
-#### Vodka
-![Vodka](./images/vodka.png)
+#### Coyote Winter
+![Coyote Winter](./images/coyote-winter.png)
 
-#### Maple Warrior
-![Maple Warrior](./images/maple_warrior.png)
-
-#### Desert
-![Desert](./images/desert.png)
-
-#### Desert 2
-![Desert 2](./images/desert2.png)
-
-#### Klosterschwester
-![Klosterschwester](./images/klosterschwester.png)
-
-## Contacts
-
-If you have questions about the generation of this patterns, you should ask Ulf Åström. He wrote the original code. You 
-can find his contact page here: [http://www.happyponyland.net/contact.php](http://www.happyponyland.net/contact.php)
-
-If you have questions about the Python code or if you want to improve it, you can always submit an issue or a PR. You can 
-also contact me using my email adress: [gael.lederrey@epfl.ch](mailto:gael.lederrey@epfl.ch)
+### TODO
+- save parameterization as metadata to image
+- file watcher integration (generate and update on parameterization change) 
+- make distributable
